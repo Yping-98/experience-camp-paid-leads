@@ -120,36 +120,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
 .btn-primary { background: #409eff; color: #fff; border-color: #409eff; }
 .btn-primary:hover { background: #66b1ff; border-color: #66b1ff; }
 
-/* Feishu Notification Demo */
-.demo-section { margin-top: 24px; }
-.demo-section-title { font-size: 15px; font-weight: 500; color: #303133; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e4e7ed; display: flex; align-items: center; gap: 8px; }
-.feishu-icon { width: 20px; height: 20px; background: #3370ff; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; font-weight: bold; }
-.feishu-card { border: 1px solid #e4e7ed; border-radius: 8px; overflow: hidden; max-width: 420px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-.feishu-card-header { background: #3370ff; color: #fff; padding: 12px 16px; font-size: 14px; font-weight: 500; }
-.feishu-card-body { padding: 16px; background: #fff; }
-.feishu-card-row { display: flex; margin-bottom: 10px; font-size: 13px; line-height: 1.6; }
-.feishu-card-row:last-child { margin-bottom: 0; }
-.feishu-card-label { color: #8f959e; width: 70px; flex-shrink: 0; }
-.feishu-card-value { color: #1f2329; }
-.feishu-card-value .at { color: #3370ff; cursor: pointer; }
-.feishu-card-remark { background: #f7f8fa; padding: 10px 12px; border-radius: 4px; margin-top: 10px; font-size: 12px; color: #646a73; line-height: 1.6; }
-
-/* Flow Demo */
-.flow-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.flow-tag { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 4px; font-size: 12px; }
-.flow-tag.green { background: #f0f9eb; border: 1px solid #c2e7b0; color: #67c23a; }
-.flow-tag.green::before { content: "✓"; font-weight: bold; }
-.flow-tag.blue { background: #ecf5ff; border: 1px solid #b3d8ff; color: #409eff; }
-.flow-tag.blue::before { content: "ⓘ"; }
-.flow-steps { display: flex; align-items: flex-start; justify-content: center; gap: 0; padding: 16px 0; flex-wrap: wrap; }
-.flow-step { display: flex; flex-direction: column; align-items: center; width: 120px; }
-.flow-step-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 8px; }
-.flow-step-icon.c1 { background: #ecf5ff; border: 2px solid #409eff; color: #409eff; }
-.flow-step-icon.c2 { background: #fdf6ec; border: 2px solid #e6a23c; color: #e6a23c; }
-.flow-step-icon.c3 { background: #f0f9eb; border: 2px solid #67c23a; color: #67c23a; }
-.flow-step-icon.c4 { background: #f4ecff; border: 2px solid #6f42c1; color: #6f42c1; }
-.flow-step-label { font-size: 12px; color: #606266; text-align: center; line-height: 1.4; }
-.flow-arrow { color: #c0c4cc; font-size: 18px; padding-top: 12px; }
 
 /* Toast */
 .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(0,0,0,.75); color: #fff; padding: 12px 24px; border-radius: 4px; font-size: 14px; z-index: 9999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
@@ -304,68 +274,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
             <button class="btn btn-primary" onclick="confirmSelection()">确定</button>
           </div>
 
-          <!-- Flow Demo -->
-          <div class="demo-section" style="margin-top:32px;">
-            <div class="demo-section-title">自动分配流程示意</div>
-            <div class="flow-tags">
-              <span class="flow-tag green">good_kind_name_level_2 = '体验版组合商品'</span>
-              <span class="flow-tag green">selle_from 包含 'tiyanying'</span>
-              <span class="flow-tag blue">电销服务期内</span>
-              <span class="flow-tag blue">无坐席归属</span>
-            </div>
-            <div class="flow-steps">
-              <div class="flow-step">
-                <div class="flow-step-icon c1">📋</div>
-                <div class="flow-step-label">检测到<br>付费订单</div>
-              </div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-step">
-                <div class="flow-step-icon c2">🔍</div>
-                <div class="flow-step-label">匹配体验营<br>付费条件</div>
-              </div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-step">
-                <div class="flow-step-icon c3">🎓</div>
-                <div class="flow-step-label">识别学段<br>查询配置</div>
-              </div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-step">
-                <div class="flow-step-icon c1">👤</div>
-                <div class="flow-step-label">轮询分配<br>给销售</div>
-              </div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-step">
-                <div class="flow-step-icon c4">💬</div>
-                <div class="flow-step-label">发送飞书<br>通知</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Feishu Notification Demo -->
-          <div class="demo-section">
-            <div class="demo-section-title">
-              <div class="feishu-icon">飞</div>
-              飞书通知消息预览
-            </div>
-            <div class="feishu-card">
-              <div class="feishu-card-header">分配了一条体验营付费线索，请前往跟进。</div>
-              <div class="feishu-card-body">
-                <div class="feishu-card-row">
-                  <span class="feishu-card-label">手机号：</span>
-                  <span class="feishu-card-value">159****6789</span>
-                </div>
-                <div class="feishu-card-row">
-                  <span class="feishu-card-label">支付时间：</span>
-                  <span class="feishu-card-value">2026-03-31 12:23:23</span>
-                </div>
-                <div class="feishu-card-row">
-                  <span class="feishu-card-label">归属坐席：</span>
-                  <span class="feishu-card-value"><span class="at">@张三</span></span>
-                </div>
-                <div class="feishu-card-remark">备注：该线索在电销服务期内购买了体验营的体验课，购课意向可能较高，请及时跟进。</div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <!-- Other Tabs (Placeholder) -->
