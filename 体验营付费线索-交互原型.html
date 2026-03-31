@@ -6,334 +6,375 @@
 <title>体验营付费线索 - 选择坐席配置 - 交互原型</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f0f2f5; color: #333; font-size: 14px; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif; background: #f0f2f5; color: #303133; font-size: 14px; }
 
 .layout { display: flex; min-height: 100vh; }
 
-.sidebar { width: 220px; background: #001529; color: #fff; flex-shrink: 0; overflow-y: auto; }
-.sidebar-header { height: 48px; display: flex; align-items: center; padding: 0 16px; background: rgba(255,255,255,0.05); }
-.sidebar-header h2 { font-size: 16px; font-weight: 500; color: #fff; margin-left: 8px; }
-.sidebar-header .hamburger { color: rgba(255,255,255,0.65); cursor: pointer; font-size: 18px; }
-.menu-item { padding: 12px 24px; color: rgba(255,255,255,0.65); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s; font-size: 14px; }
+/* Sidebar */
+.sidebar { width: 210px; background: #304156; color: #bfcbd9; flex-shrink: 0; overflow-y: auto; }
+.sidebar-logo { height: 50px; display: flex; align-items: center; padding: 0 16px; background: #2b3b4e; }
+.sidebar-logo img { width: 32px; height: 32px; border-radius: 6px; }
+.sidebar-logo h2 { font-size: 14px; font-weight: 600; color: #fff; margin-left: 10px; }
+.menu-item { padding: 0 20px; height: 48px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: #bfcbd9; transition: all 0.2s; border-left: 3px solid transparent; }
 .menu-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
-.menu-item.active { color: #fff; background: #1890ff; }
-.menu-item .icon { width: 16px; text-align: center; }
-.submenu { background: #000c17; }
-.submenu .menu-item { padding-left: 48px; font-size: 13px; }
+.menu-item.active { color: #409eff; background: rgba(64,158,255,0.08); border-left-color: #409eff; }
+.menu-item .icon { width: 16px; font-size: 16px; flex-shrink: 0; text-align: center; }
+.menu-group { padding: 12px 20px 6px; font-size: 12px; color: rgba(191,203,217,0.5); text-transform: uppercase; letter-spacing: 1px; }
+.submenu .menu-item { padding-left: 50px; height: 42px; font-size: 13px; }
 
+/* Main Content */
 .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 
-.header { height: 48px; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid #e8e8e8; }
-.breadcrumb { color: #999; font-size: 14px; }
-.breadcrumb span { color: #1890ff; }
+/* Header */
+.header { height: 50px; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid #e4e7ed; flex-shrink: 0; }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-left .collapse-btn { color: #97a8be; cursor: pointer; font-size: 18px; }
+.breadcrumb { color: #97a8be; font-size: 14px; }
+.header-center { color: #409eff; font-size: 13px; }
 .header-right { display: flex; align-items: center; gap: 16px; }
-.header-right .bell { font-size: 18px; color: #666; cursor: pointer; }
-.header-right .user-info { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-.header-right .avatar { width: 28px; height: 28px; border-radius: 50%; background: #87ceeb; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff; }
+.header-right .icon-btn { color: #409eff; cursor: pointer; font-size: 18px; }
+.user-info { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.user-avatar { width: 28px; height: 28px; border-radius: 50%; background: #409eff; display: flex; align-items: center; justify-content: center; }
+.user-avatar img { width: 28px; height: 28px; border-radius: 50%; }
+.user-name { font-size: 14px; color: #303133; }
 
-.content { padding: 16px 24px; flex: 1; }
+/* Tags View */
+.tags-view { height: 34px; background: #fff; border-bottom: 1px solid #d8dce5; display: flex; align-items: center; padding: 0 8px; gap: 6px; flex-shrink: 0; }
+.tag-item { padding: 2px 8px; font-size: 12px; color: #495060; background: #fff; border: 1px solid #d8dce5; border-radius: 2px; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+.tag-item.active { background: #409eff; color: #fff; border-color: #409eff; }
 
-.page-tabs { display: flex; border-bottom: 1px solid #e8e8e8; background: #fff; margin: -16px -24px 16px; padding: 0 24px; }
-.page-tab { padding: 12px 20px; cursor: pointer; color: #666; font-size: 14px; border-bottom: 2px solid transparent; transition: all 0.2s; user-select: none; white-space: nowrap; }
-.page-tab:hover { color: #1890ff; }
-.page-tab.active { color: #1890ff; border-bottom-color: #1890ff; font-weight: 500; }
+/* Content */
+.content { padding: 20px; flex: 1; overflow: auto; }
 
-.badge-new { display: inline-block; background: #ff4d4f; color: #fff; font-size: 10px; padding: 0 4px; border-radius: 2px; margin-left: 6px; line-height: 16px; vertical-align: middle; }
+/* Card */
+.main-card { background: #fff; border: 1px solid #e4e7ed; border-radius: 4px; box-shadow: 0 2px 12px 0 rgba(0,0,0,.06); padding: 20px; }
+
+/* Top-Level Tabs */
+.top-tabs { display: flex; border-bottom: 2px solid #e4e7ed; margin-bottom: 16px; }
+.top-tab { padding: 0 20px; height: 40px; display: flex; align-items: center; font-size: 14px; color: #303133; cursor: pointer; border: 1px solid #e4e7ed; border-bottom: none; background: #fff; margin-right: -1px; transition: all 0.2s; user-select: none; }
+.top-tab:first-child { border-radius: 4px 0 0 0; }
+.top-tab:last-child { border-radius: 0 4px 0 0; }
+.top-tab:hover { color: #409eff; }
+.top-tab.active { color: #409eff; border-bottom: 2px solid #fff; margin-bottom: -2px; font-weight: 500; }
+.top-tab .badge-new { display: inline-block; background: #f56c6c; color: #fff; font-size: 10px; padding: 0 5px; border-radius: 8px; margin-left: 6px; line-height: 16px; }
 
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-.data-table { width: 100%; background: #fff; border-radius: 4px; border-collapse: collapse; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-.data-table th { background: #fafafa; font-weight: 500; text-align: left; padding: 14px 16px; border-bottom: 1px solid #e8e8e8; color: #666; }
-.data-table td { padding: 14px 16px; border-bottom: 1px solid #e8e8e8; line-height: 1.8; }
-.data-table tr:last-child td { border-bottom: none; }
-.data-table .col-grade { width: 120px; }
-.data-table .col-action { width: 100px; text-align: center; }
-.data-table .col-action th { text-align: center; }
-.btn-edit { color: #1890ff; border: 1px solid #1890ff; background: #fff; padding: 4px 16px; border-radius: 4px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
-.btn-edit:hover { background: #1890ff; color: #fff; }
+/* Radio Button Group */
+.radio-group { display: inline-flex; margin-bottom: 12px; }
+.radio-btn { padding: 8px 15px; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #dcdfe6; color: #606266; background: #fff; transition: all 0.2s; user-select: none; outline: none; }
+.radio-btn:first-child { border-radius: 4px 0 0 4px; }
+.radio-btn:last-child { border-radius: 0 4px 4px 0; }
+.radio-btn + .radio-btn { border-left: none; }
+.radio-btn:hover { color: #409eff; }
+.radio-btn.active { background: #409eff; color: #fff; border-color: #409eff; }
+.radio-btn.active + .radio-btn { border-left: 1px solid #409eff; }
 
-.empty-agents { color: #bfbfbf; }
+/* Two Column Layout */
+.two-col { display: flex; gap: 0; }
+.col-left { flex: 0 0 33.3333%; max-width: 33.3333%; }
+.col-right { flex: 0 0 66.6667%; max-width: 66.6667%; }
 
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s; }
-.modal-overlay.show { opacity: 1; visibility: visible; }
+.panel-card { border: 1px solid #e4e7ed; border-radius: 4px; background: #fff; overflow: hidden; height: 400px; display: flex; flex-direction: column; }
+.panel-header { padding: 18px 20px; border-bottom: 1px solid #e4e7ed; font-size: 14px; color: #303133; font-weight: 500; flex-shrink: 0; }
 
-.modal { background: #fff; border-radius: 4px; width: 680px; max-height: 80vh; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: scale(0.9); transition: transform 0.3s; }
-.modal-overlay.show .modal { transform: scale(1); }
-.modal-header { padding: 16px 24px; border-bottom: 1px solid #e8e8e8; font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; }
-.modal-header .close-btn { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #999; font-size: 18px; border-radius: 4px; }
-.modal-header .close-btn:hover { background: #f5f5f5; color: #333; }
-.modal-body { padding: 24px; flex: 1; overflow: hidden; display: flex; flex-direction: column; }
-.modal-footer { padding: 12px 24px; border-top: 1px solid #e8e8e8; display: flex; gap: 12px; justify-content: flex-end; }
-.btn-cancel { background: #fff; border: 1px solid #d9d9d9; padding: 6px 20px; border-radius: 4px; cursor: pointer; font-size: 14px; }
-.btn-cancel:hover { color: #1890ff; border-color: #1890ff; }
-.btn-submit { background: #1890ff; color: #fff; border: none; padding: 6px 20px; border-radius: 4px; cursor: pointer; font-size: 14px; }
-.btn-submit:hover { background: #40a9ff; }
+/* Left Panel - Group Selector */
+.group-select { width: 100%; position: relative; }
+.group-select-input { width: 100%; padding: 0 30px 0 12px; height: 32px; border: 1px solid #dcdfe6; border-radius: 4px; font-size: 14px; color: #606266; background: #fff; cursor: pointer; outline: none; }
+.group-select-input::placeholder { color: #c0c4cc; }
+.group-select-input:focus { border-color: #409eff; }
+.group-select-arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #c0c4cc; font-size: 12px; pointer-events: none; }
+.group-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #e4e7ed; border-radius: 4px; box-shadow: 0 2px 12px rgba(0,0,0,.12); z-index: 10; margin-top: 4px; max-height: 200px; overflow-y: auto; display: none; }
+.group-dropdown.show { display: block; }
+.group-option { padding: 8px 12px; cursor: pointer; font-size: 14px; color: #606266; }
+.group-option:hover { background: #f5f7fa; color: #409eff; }
+.group-option.active { color: #409eff; font-weight: 500; }
 
-.staff-picker-label { margin-bottom: 12px; color: #333; font-size: 14px; }
-.staff-picker { display: flex; gap: 0; flex: 1; overflow: hidden; border: 1px solid #e8e8e8; border-radius: 4px; min-height: 360px; }
-.picker-left { flex: 1; border-right: 1px solid #e8e8e8; display: flex; flex-direction: column; overflow: hidden; }
-.picker-right { width: 240px; display: flex; flex-direction: column; overflow: hidden; }
+/* Member List in Left Panel */
+.member-list-container { flex: 1; overflow-y: auto; padding: 0; }
+.member-list { padding: 8px 0; }
+.member-item { padding: 6px 20px; display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: #606266; transition: background 0.15s; }
+.member-item:hover { background: #f5f7fa; }
+.member-checkbox { width: 14px; height: 14px; border: 1px solid #dcdfe6; border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; cursor: pointer; }
+.member-checkbox.checked { background: #409eff; border-color: #409eff; }
+.member-checkbox.checked::after { content: "✓"; color: #fff; font-size: 10px; line-height: 1; }
 
-.search-box { padding: 12px; }
-.search-input { width: 100%; padding: 6px 12px; border: 1px solid #d9d9d9; border-radius: 4px; font-size: 14px; outline: none; }
-.search-input:focus { border-color: #1890ff; box-shadow: 0 0 0 2px rgba(24,144,255,0.2); }
-.search-input::placeholder { color: #bfbfbf; }
+/* Empty State */
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; color: #c0c4cc; }
+.empty-icon { width: 80px; height: 60px; margin-bottom: 12px; opacity: 0.4; }
+.empty-text { font-size: 14px; color: #909399; }
 
-.tree-container { flex: 1; overflow-y: auto; padding: 0 12px 12px; }
-.tree-node { user-select: none; }
-.tree-node-content { display: flex; align-items: center; padding: 4px 0; cursor: pointer; gap: 6px; }
-.tree-node-content:hover { background: #f5f5f5; border-radius: 2px; }
-.tree-toggle { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #999; flex-shrink: 0; transition: transform 0.2s; cursor: pointer; }
-.tree-toggle.expanded { transform: rotate(90deg); }
-.tree-toggle.empty { visibility: hidden; }
-.tree-checkbox { width: 16px; height: 16px; border: 1px solid #d9d9d9; border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; transition: all 0.2s; }
-.tree-checkbox.checked { background: #1890ff; border-color: #1890ff; }
-.tree-checkbox.checked::after { content: "✓"; color: #fff; font-size: 11px; }
-.tree-checkbox.indeterminate { border-color: #1890ff; }
-.tree-checkbox.indeterminate::after { content: ""; display: block; width: 8px; height: 2px; background: #1890ff; }
-.tree-label { font-size: 14px; color: #333; }
-.tree-children { padding-left: 22px; }
-.tree-children.collapsed { display: none; }
+/* Right Panel - Selected Tags */
+.tags-body { padding: 20px; flex: 1; overflow-y: auto; }
+.tag-wrap { display: flex; flex-wrap: wrap; gap: 0; }
+.agent-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 5px 0 9px; margin: 0 10px 10px 0; font-size: 12px; background: #ecf5ff; color: #409eff; border: 1px solid #d9ecff; border-radius: 4px; line-height: 1; }
+.agent-tag .close { width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center; margin-left: 4px; border-radius: 50%; cursor: pointer; font-size: 12px; color: #409eff; transition: all 0.15s; }
+.agent-tag .close:hover { background: #409eff; color: #fff; }
 
-.selected-header { padding: 12px; font-size: 14px; color: #333; border-bottom: 1px solid #e8e8e8; font-weight: 500; }
-.selected-list { flex: 1; overflow-y: auto; padding: 0; }
-.selected-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
-.selected-item:last-child { border-bottom: none; }
-.selected-item .name { font-size: 14px; color: #333; }
-.selected-item .remove-btn { width: 20px; height: 20px; border-radius: 50%; background: #f5f5f5; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; transition: all 0.2s; }
-.selected-item .remove-btn:hover { background: #ff4d4f; color: #fff; }
+/* Bottom Buttons */
+.btn-cont { margin-top: 16px; display: flex; gap: 12px; }
+.btn { padding: 8px 15px; font-size: 14px; border-radius: 4px; cursor: pointer; border: 1px solid #dcdfe6; transition: all 0.2s; outline: none; }
+.btn-default { background: #fff; color: #606266; }
+.btn-default:hover { color: #409eff; border-color: #c6e2ff; background: #ecf5ff; }
+.btn-primary { background: #409eff; color: #fff; border-color: #409eff; }
+.btn-primary:hover { background: #66b1ff; border-color: #66b1ff; }
 
-.toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.75); color: #fff; padding: 12px 24px; border-radius: 4px; font-size: 14px; z-index: 2000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-.toast.show { opacity: 1; }
-
-.feishu-demo { background: #fff; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-top: 16px; }
-.feishu-demo-header { padding: 16px 20px; border-bottom: 1px solid #e8e8e8; font-weight: 500; font-size: 15px; display: flex; align-items: center; gap: 8px; }
-.feishu-demo-header .icon-feishu { width: 20px; height: 20px; background: #3370ff; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: bold; }
-.feishu-card { margin: 16px 20px; border: 1px solid #e8e8e8; border-radius: 8px; overflow: hidden; max-width: 420px; }
+/* Feishu Notification Demo */
+.demo-section { margin-top: 24px; }
+.demo-section-title { font-size: 15px; font-weight: 500; color: #303133; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e4e7ed; display: flex; align-items: center; gap: 8px; }
+.feishu-icon { width: 20px; height: 20px; background: #3370ff; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; font-weight: bold; }
+.feishu-card { border: 1px solid #e4e7ed; border-radius: 8px; overflow: hidden; max-width: 420px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
 .feishu-card-header { background: #3370ff; color: #fff; padding: 12px 16px; font-size: 14px; font-weight: 500; }
-.feishu-card-body { padding: 16px; }
+.feishu-card-body { padding: 16px; background: #fff; }
 .feishu-card-row { display: flex; margin-bottom: 10px; font-size: 13px; line-height: 1.6; }
 .feishu-card-row:last-child { margin-bottom: 0; }
-.feishu-card-label { color: #666; width: 70px; flex-shrink: 0; }
-.feishu-card-value { color: #333; }
-.feishu-card-value .at-mention { color: #3370ff; cursor: pointer; }
-.feishu-card-remark { background: #f7f8fa; padding: 10px 12px; border-radius: 4px; margin-top: 8px; font-size: 12px; color: #666; line-height: 1.6; }
+.feishu-card-label { color: #8f959e; width: 70px; flex-shrink: 0; }
+.feishu-card-value { color: #1f2329; }
+.feishu-card-value .at { color: #3370ff; cursor: pointer; }
+.feishu-card-remark { background: #f7f8fa; padding: 10px 12px; border-radius: 4px; margin-top: 10px; font-size: 12px; color: #646a73; line-height: 1.6; }
 
-.section-title { font-size: 15px; font-weight: 500; color: #333; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e8e8e8; }
+/* Flow Demo */
+.flow-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.flow-tag { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 4px; font-size: 12px; }
+.flow-tag.green { background: #f0f9eb; border: 1px solid #c2e7b0; color: #67c23a; }
+.flow-tag.green::before { content: "✓"; font-weight: bold; }
+.flow-tag.blue { background: #ecf5ff; border: 1px solid #b3d8ff; color: #409eff; }
+.flow-tag.blue::before { content: "ⓘ"; }
+.flow-steps { display: flex; align-items: flex-start; justify-content: center; gap: 0; padding: 16px 0; flex-wrap: wrap; }
+.flow-step { display: flex; flex-direction: column; align-items: center; width: 120px; }
+.flow-step-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 8px; }
+.flow-step-icon.c1 { background: #ecf5ff; border: 2px solid #409eff; color: #409eff; }
+.flow-step-icon.c2 { background: #fdf6ec; border: 2px solid #e6a23c; color: #e6a23c; }
+.flow-step-icon.c3 { background: #f0f9eb; border: 2px solid #67c23a; color: #67c23a; }
+.flow-step-icon.c4 { background: #f4ecff; border: 2px solid #6f42c1; color: #6f42c1; }
+.flow-step-label { font-size: 12px; color: #606266; text-align: center; line-height: 1.4; }
+.flow-arrow { color: #c0c4cc; font-size: 18px; padding-top: 12px; }
 
-.flow-demo { background: #fff; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-top: 16px; padding: 20px; }
-.flow-steps { display: flex; align-items: flex-start; gap: 0; justify-content: center; flex-wrap: wrap; padding: 20px 0; }
-.flow-step { display: flex; flex-direction: column; align-items: center; width: 140px; }
-.flow-step-circle { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 8px; }
-.flow-step-circle.blue { background: #e6f7ff; border: 2px solid #1890ff; color: #1890ff; }
-.flow-step-circle.green { background: #f6ffed; border: 2px solid #52c41a; color: #52c41a; }
-.flow-step-circle.orange { background: #fff7e6; border: 2px solid #faad14; color: #faad14; }
-.flow-step-circle.purple { background: #f9f0ff; border: 2px solid #722ed1; color: #722ed1; }
-.flow-step-label { font-size: 12px; color: #666; text-align: center; line-height: 1.4; }
-.flow-arrow { display: flex; align-items: center; color: #d9d9d9; font-size: 20px; padding-top: 14px; }
+/* Toast */
+.toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(0,0,0,.75); color: #fff; padding: 12px 24px; border-radius: 4px; font-size: 14px; z-index: 9999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.toast.show { opacity: 1; }
 
-.condition-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-.condition-tag { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 4px; font-size: 12px; }
-.condition-tag.match { background: #f6ffed; border: 1px solid #b7eb8f; color: #52c41a; }
-.condition-tag.match::before { content: "✓"; font-weight: bold; }
-.condition-tag.info { background: #e6f7ff; border: 1px solid #91d5ff; color: #1890ff; }
-.condition-tag.info::before { content: "ⓘ"; font-weight: bold; }
-
-::-webkit-scrollbar { width: 6px; }
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #d9d9d9; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #bfbfbf; }
+::-webkit-scrollbar-thumb { background: #dcdfe6; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #c0c4cc; }
 </style>
 </head>
 <body>
 <div class="layout">
+  <!-- Sidebar -->
   <div class="sidebar">
-    <div class="sidebar-header">
-      <span class="hamburger">☰</span>
-      <h2>CRM 管理系统</h2>
+    <div class="sidebar-logo">
+      <div style="width:32px;height:32px;background:#409eff;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:12px;">CRM</div>
+      <h2>电销CRM</h2>
     </div>
-    <div class="menu-item"><span class="icon">📊</span> 数据看板</div>
+    <div class="menu-item"><span class="icon">🔍</span> 搜线索</div>
+    <div class="menu-item"><span class="icon">🏠</span> 个人工作台</div>
+    <div class="menu-item"><span class="icon">📦</span> 公海池</div>
     <div class="menu-item"><span class="icon">👤</span> 客户管理 ▸</div>
-    <div class="menu-item"><span class="icon">📦</span> 订单管理 ▸</div>
-    <div class="menu-item"><span class="icon">📈</span> 数据统计 ▸</div>
-    <div class="menu-item"><span class="icon">🎧</span> 坐席管理 ▸</div>
-    <div class="menu-item" style="color:#fff; background:rgba(255,255,255,0.08);">
-      <span class="icon">⚙️</span> 系统管理 ▾
-    </div>
+    <div class="menu-item"><span class="icon">📋</span> 订单管理 ▸</div>
+    <div class="menu-item"><span class="icon">📊</span> 数据统计 ▸</div>
+    <div class="menu-item"><span class="icon">🎯</span> 活动管理 ▸</div>
+    <div class="menu-item"><span class="icon">🛒</span> 积分商城 ▸</div>
+    <div class="menu-item"><span class="icon">💰</span> 薪酬体系 ▸</div>
+    <div class="menu-item" style="color:#fff;"><span class="icon">⚙️</span> 系统设置 ▾</div>
     <div class="submenu">
-      <div class="menu-item">系统配置</div>
-      <div class="menu-item active">选择坐席</div>
-      <div class="menu-item">角色管理</div>
-      <div class="menu-item">操作日志</div>
+      <div class="menu-item">线索分配设置</div>
+      <div class="menu-item">私域分配设置</div>
+      <div class="menu-item">线索定向分配</div>
+      <div class="menu-item active">坐席选择设置</div>
+      <div class="menu-item">质检坐席设置</div>
+      <div class="menu-item">飞书推送设置</div>
     </div>
+    <div class="menu-item"><span class="icon">🎧</span> 坐席管理 ▸</div>
+    <div class="menu-item"><span class="icon">📅</span> 日常运营 ▸</div>
   </div>
 
+  <!-- Main -->
   <div class="main">
     <div class="header">
-      <span class="breadcrumb">系统管理 / <span>选择坐席</span></span>
+      <div class="header-left">
+        <span class="collapse-btn">☰</span>
+        <span class="breadcrumb">系统管理</span>
+      </div>
+      <div class="header-center">今日已领0，自助线索池上限10/日</div>
       <div class="header-right">
-        <span class="bell">🔔</span>
+        <span class="icon-btn" title="数据大盘">📊</span>
+        <span class="icon-btn" title="搜索菜单">🔍</span>
         <div class="user-info">
-          <span>管理员</span>
-          <div class="avatar">A</div>
+          <div class="user-avatar" style="background:#409eff;color:#fff;font-size:10px;">CRM</div>
+          <span class="user-name">liyingping</span>
         </div>
       </div>
+    </div>
+    <div class="tags-view">
+      <div class="tag-item active">首页</div>
     </div>
 
     <div class="content">
-      <div class="page-tabs">
-        <div class="page-tab" data-tab="leads">线索品</div>
-        <div class="page-tab" data-tab="fission">裂变分配设置</div>
-        <div class="page-tab active" data-tab="expcamp">体验营付费线索<span class="badge-new">NEW</span></div>
-      </div>
-
-      <!-- Tab: 线索品 -->
-      <div class="tab-content" id="tab-leads">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th class="col-grade">客户学段</th>
-              <th>承接人员</th>
-              <th class="col-action">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>小学</td><td>张伟, 李芳, 王磊, 刘洋, 陈静</td><td class="col-action"><button class="btn-edit" disabled style="opacity:0.5;cursor:not-allowed;">编辑</button></td></tr>
-            <tr><td>初中</td><td>赵强, 孙丽, 周杰, 吴桐, 郑雨, 冯志辉, 涂婵, 袁坤</td><td class="col-action"><button class="btn-edit" disabled style="opacity:0.5;cursor:not-allowed;">编辑</button></td></tr>
-            <tr><td>高中</td><td>赵强, 孙丽, 周杰, 吴桐, 郑雨, 冯志辉</td><td class="col-action"><button class="btn-edit" disabled style="opacity:0.5;cursor:not-allowed;">编辑</button></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Tab: 裂变分配设置 -->
-      <div class="tab-content" id="tab-fission">
-        <div style="background:#fff;padding:40px;border-radius:4px;text-align:center;color:#bfbfbf;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-          裂变分配设置（已有功能，此处省略展示）
-        </div>
-      </div>
-
-      <!-- Tab: 体验营付费线索 (NEW) -->
-      <div class="tab-content active" id="tab-expcamp">
-        <table class="data-table" id="expcampTable">
-          <thead>
-            <tr>
-              <th class="col-grade">客户学段</th>
-              <th>承接人员</th>
-              <th class="col-action">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr data-grade="PRIMARY">
-              <td>小学</td>
-              <td class="agents-cell">张伟, 李芳, 王磊</td>
-              <td class="col-action"><button class="btn-edit" onclick="openEditModal('小学', 'PRIMARY')">编辑</button></td>
-            </tr>
-            <tr data-grade="JUNIOR">
-              <td>初中</td>
-              <td class="agents-cell">赵强, 孙丽, 周杰, 吴桐, 郑雨</td>
-              <td class="col-action"><button class="btn-edit" onclick="openEditModal('初中', 'JUNIOR')">编辑</button></td>
-            </tr>
-            <tr data-grade="SENIOR">
-              <td>高中</td>
-              <td class="agents-cell"><span class="empty-agents">—</span></td>
-              <td class="col-action"><button class="btn-edit" onclick="openEditModal('高中', 'SENIOR')">编辑</button></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- 分配流程示意 -->
-        <div class="flow-demo">
-          <div class="section-title">自动分配流程示意</div>
-          <div class="condition-tags">
-            <span class="condition-tag match">good_kind_name_level_2 = '体验版组合商品'</span>
-            <span class="condition-tag match">selle_from 包含 'tiyanying'</span>
-            <span class="condition-tag info">电销服务期内</span>
-            <span class="condition-tag info">无坐席归属</span>
-          </div>
-          <div class="flow-steps">
-            <div class="flow-step">
-              <div class="flow-step-circle blue">📋</div>
-              <div class="flow-step-label">检测到<br>付费订单</div>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-step">
-              <div class="flow-step-circle orange">🔍</div>
-              <div class="flow-step-label">匹配体验营<br>付费条件</div>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-step">
-              <div class="flow-step-circle green">🎓</div>
-              <div class="flow-step-label">识别学段<br>查询配置</div>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-step">
-              <div class="flow-step-circle blue">👤</div>
-              <div class="flow-step-label">轮询分配<br>给销售</div>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-step">
-              <div class="flow-step-circle purple">💬</div>
-              <div class="flow-step-label">发送飞书<br>通知</div>
-            </div>
-          </div>
+      <div class="main-card">
+        <!-- Top Level Tabs -->
+        <div class="top-tabs">
+          <div class="top-tab" data-tab="newmedia">新媒体998</div>
+          <div class="top-tab" data-tab="kefu">客服推送</div>
+          <div class="top-tab" data-tab="xuexiji">学习机待支付</div>
+          <div class="top-tab" data-tab="miniapp">小程序推送</div>
+          <div class="top-tab" data-tab="youxue">游学商品</div>
+          <div class="top-tab" data-tab="xiansuopin">线索品</div>
+          <div class="top-tab active" data-tab="expcamp">体验营付费线索<span class="badge-new">NEW</span></div>
         </div>
 
-        <!-- 飞书通知示例 -->
-        <div class="feishu-demo">
-          <div class="feishu-demo-header">
-            <div class="icon-feishu">飞</div>
-            飞书通知消息预览
+        <!-- Tab: 线索品 (reference) -->
+        <div class="tab-content" id="tab-xiansuopin">
+          <div class="radio-group">
+            <button class="radio-btn active" onclick="switchGrade(this,'xsp')">小学</button>
+            <button class="radio-btn" onclick="switchGrade(this,'xsp')">初中</button>
+            <button class="radio-btn" onclick="switchGrade(this,'xsp')">高中</button>
           </div>
-          <div class="feishu-card">
-            <div class="feishu-card-header">分配了一条体验营付费线索，请前往跟进。</div>
-            <div class="feishu-card-body">
-              <div class="feishu-card-row">
-                <span class="feishu-card-label">手机号：</span>
-                <span class="feishu-card-value">159****6789</span>
+          <div class="two-col">
+            <div class="col-left">
+              <div class="panel-card">
+                <div class="panel-header" style="padding:12px 20px;">
+                  <div class="group-select">
+                    <input class="group-select-input" placeholder="请选择小组" readonly>
+                    <span class="group-select-arrow">▼</span>
+                  </div>
+                </div>
+                <div class="member-list-container">
+                  <div class="empty-state">
+                    <svg class="empty-icon" viewBox="0 0 79 86" fill="none"><rect x="10" y="20" width="59" height="45" rx="4" fill="#e4e7ed" opacity="0.5"/><rect x="18" y="30" width="43" height="4" rx="2" fill="#c0c4cc" opacity="0.4"/><rect x="18" y="40" width="30" height="4" rx="2" fill="#c0c4cc" opacity="0.4"/><rect x="18" y="50" width="36" height="4" rx="2" fill="#c0c4cc" opacity="0.4"/></svg>
+                    <span class="empty-text">暂无数据</span>
+                  </div>
+                </div>
               </div>
-              <div class="feishu-card-row">
-                <span class="feishu-card-label">支付时间：</span>
-                <span class="feishu-card-value">2026-03-31 12:23:23</span>
+            </div>
+            <div class="col-right">
+              <div class="panel-card">
+                <div class="panel-header">已选坐席</div>
+                <div class="tags-body">
+                  <div class="tag-wrap" style="color:#c0c4cc;">线索品示例数据，请点击【体验营付费线索】Tab查看</div>
+                </div>
               </div>
-              <div class="feishu-card-row">
-                <span class="feishu-card-label">归属坐席：</span>
-                <span class="feishu-card-value"><span class="at-mention">@张三</span></span>
+            </div>
+          </div>
+          <div class="btn-cont">
+            <button class="btn btn-default">重置</button>
+            <button class="btn btn-primary">确定</button>
+          </div>
+        </div>
+
+        <!-- Tab: 体验营付费线索 (NEW) -->
+        <div class="tab-content active" id="tab-expcamp">
+          <!-- Radio Buttons -->
+          <div class="radio-group" id="gradeRadio">
+            <button class="radio-btn active" data-grade="PRIMARY" onclick="switchGrade(this,'exp')">小学</button>
+            <button class="radio-btn" data-grade="JUNIOR" onclick="switchGrade(this,'exp')">初中</button>
+            <button class="radio-btn" data-grade="SENIOR" onclick="switchGrade(this,'exp')">高中</button>
+          </div>
+
+          <!-- Two Column Layout -->
+          <div class="two-col">
+            <!-- Left: Group Selector + Member List -->
+            <div class="col-left">
+              <div class="panel-card">
+                <div class="panel-header" style="padding:12px 20px;">
+                  <div class="group-select" id="groupSelect">
+                    <input class="group-select-input" id="groupInput" placeholder="请选择小组" readonly onclick="toggleDropdown()">
+                    <span class="group-select-arrow">▼</span>
+                    <div class="group-dropdown" id="groupDropdown"></div>
+                  </div>
+                </div>
+                <div class="member-list-container" id="memberList"></div>
               </div>
-              <div class="feishu-card-remark">备注：该线索在电销服务期内购买了体验营的体验课，购课意向可能较高，请及时跟进。</div>
+            </div>
+            <!-- Right: Selected Agents -->
+            <div class="col-right">
+              <div class="panel-card">
+                <div class="panel-header" id="selectedHeader">已选坐席</div>
+                <div class="tags-body" id="selectedTags"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="btn-cont">
+            <button class="btn btn-default" onclick="resetSelection()">重置</button>
+            <button class="btn btn-primary" onclick="confirmSelection()">确定</button>
+          </div>
+
+          <!-- Flow Demo -->
+          <div class="demo-section" style="margin-top:32px;">
+            <div class="demo-section-title">自动分配流程示意</div>
+            <div class="flow-tags">
+              <span class="flow-tag green">good_kind_name_level_2 = '体验版组合商品'</span>
+              <span class="flow-tag green">selle_from 包含 'tiyanying'</span>
+              <span class="flow-tag blue">电销服务期内</span>
+              <span class="flow-tag blue">无坐席归属</span>
+            </div>
+            <div class="flow-steps">
+              <div class="flow-step">
+                <div class="flow-step-icon c1">📋</div>
+                <div class="flow-step-label">检测到<br>付费订单</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step">
+                <div class="flow-step-icon c2">🔍</div>
+                <div class="flow-step-label">匹配体验营<br>付费条件</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step">
+                <div class="flow-step-icon c3">🎓</div>
+                <div class="flow-step-label">识别学段<br>查询配置</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step">
+                <div class="flow-step-icon c1">👤</div>
+                <div class="flow-step-label">轮询分配<br>给销售</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step">
+                <div class="flow-step-icon c4">💬</div>
+                <div class="flow-step-label">发送飞书<br>通知</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feishu Notification Demo -->
+          <div class="demo-section">
+            <div class="demo-section-title">
+              <div class="feishu-icon">飞</div>
+              飞书通知消息预览
+            </div>
+            <div class="feishu-card">
+              <div class="feishu-card-header">分配了一条体验营付费线索，请前往跟进。</div>
+              <div class="feishu-card-body">
+                <div class="feishu-card-row">
+                  <span class="feishu-card-label">手机号：</span>
+                  <span class="feishu-card-value">159****6789</span>
+                </div>
+                <div class="feishu-card-row">
+                  <span class="feishu-card-label">支付时间：</span>
+                  <span class="feishu-card-value">2026-03-31 12:23:23</span>
+                </div>
+                <div class="feishu-card-row">
+                  <span class="feishu-card-label">归属坐席：</span>
+                  <span class="feishu-card-value"><span class="at">@张三</span></span>
+                </div>
+                <div class="feishu-card-remark">备注：该线索在电销服务期内购买了体验营的体验课，购课意向可能较高，请及时跟进。</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Edit Modal -->
-<div class="modal-overlay" id="editModal">
-  <div class="modal">
-    <div class="modal-header">
-      <span id="modalTitle">编辑承接人员 - 小学</span>
-      <span class="close-btn" onclick="closeEditModal()">✕</span>
-    </div>
-    <div class="modal-body">
-      <div class="staff-picker-label">选择员工：</div>
-      <div class="staff-picker">
-        <div class="picker-left">
-          <div class="search-box">
-            <input type="text" class="search-input" placeholder="搜索员工" id="staffSearch" oninput="filterTree()">
-          </div>
-          <div class="tree-container" id="treeContainer"></div>
-        </div>
-        <div class="picker-right">
-          <div class="selected-header" id="selectedHeader">已选 0 人</div>
-          <div class="selected-list" id="selectedList"></div>
-        </div>
+        <!-- Other Tabs (Placeholder) -->
+        <div class="tab-content" id="tab-newmedia"></div>
+        <div class="tab-content" id="tab-kefu"></div>
+        <div class="tab-content" id="tab-xuexiji"></div>
+        <div class="tab-content" id="tab-miniapp"></div>
+        <div class="tab-content" id="tab-youxue"></div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeEditModal()">取消</button>
-      <button class="btn-submit" onclick="saveConfig()">确定</button>
     </div>
   </div>
 </div>
@@ -341,42 +382,29 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC"
 <div class="toast" id="toast"></div>
 
 <script>
-var orgData = [
-  {
-    name: '电销一部',
-    children: [
-      { name: '一组', members: ['张伟','李芳','王磊','刘洋','陈静'] },
-      { name: '二组', members: ['赵强','孙丽','周杰','吴桐','郑雨'] }
-    ]
-  },
-  {
-    name: '电销二部',
-    children: [
-      { name: '三组', members: ['冯志辉','涂婵','袁坤','刘莹','林涛'] },
-      { name: '四组', members: ['刘庆一','李文浩','刘文龙','朱强','杨晓慧'] }
-    ]
-  },
-  {
-    name: '电销三部',
-    children: [
-      { name: '五组', members: ['袁怀登','易杰','盛红兵','罗智明','朱巧会'] },
-      { name: '六组', members: ['谢雪芹','顾双双','杨佐恒','兰正红','陈斯武'] }
-    ]
-  }
-];
-
-var gradeConfig = {
-  PRIMARY: ['张伟','李芳','王磊'],
-  JUNIOR: ['赵强','孙丽','周杰','吴桐','郑雨'],
-  SENIOR: []
+var orgGroups = {
+  '电销一组': ['张伟','李芳','王磊','刘洋','陈静','赵明','孙华'],
+  '电销二组': ['赵强','孙丽','周杰','吴桐','郑雨','冯志辉','涂婵'],
+  '电销三组': ['袁坤','刘莹','林涛','刘庆一','李文浩','朱强','杨晓慧'],
+  '电销四组': ['袁怀登','易杰','盛红兵','罗智明','朱巧会','谢雪芹','顾双双'],
+  '电销五组': ['杨佐恒','兰正红','陈斯武','罗宇环','阮长峰','邹建伟','熊逸凡']
 };
 
-var currentGrade = '';
-var selectedStaff = [];
+var gradeConfig = {
+  PRIMARY: ['张伟','李芳','王磊','赵强','孙丽','周杰'],
+  JUNIOR: ['袁坤','刘莹','林涛','刘庆一','李文浩','朱强','杨晓慧','袁怀登','易杰','盛红兵','罗智明','朱巧会','谢雪芹','顾双双'],
+  SENIOR: []
+};
+var savedConfig = JSON.parse(JSON.stringify(gradeConfig));
 
-document.querySelectorAll('.page-tab').forEach(function(tab) {
+var currentGrade = 'PRIMARY';
+var currentGroup = '';
+var dropdownOpen = false;
+
+// Tab switching
+document.querySelectorAll('.top-tab').forEach(function(tab) {
   tab.addEventListener('click', function() {
-    document.querySelectorAll('.page-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.top-tab').forEach(function(t) { t.classList.remove('active'); });
     document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
     tab.classList.add('active');
     var target = tab.getAttribute('data-tab');
@@ -384,127 +412,116 @@ document.querySelectorAll('.page-tab').forEach(function(tab) {
   });
 });
 
-function openEditModal(gradeName, gradeKey) {
-  currentGrade = gradeKey;
-  selectedStaff = (gradeConfig[gradeKey] || []).slice();
-  document.getElementById('modalTitle').textContent = '编辑承接人员 - ' + gradeName;
-  document.getElementById('staffSearch').value = '';
-  renderTree();
-  renderSelected();
-  document.getElementById('editModal').classList.add('show');
+function switchGrade(btn, prefix) {
+  var group = btn.parentElement;
+  group.querySelectorAll('.radio-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  if (prefix === 'exp') {
+    currentGrade = btn.getAttribute('data-grade');
+    currentGroup = '';
+    document.getElementById('groupInput').value = '';
+    renderMemberList();
+    renderSelectedTags();
+  }
 }
 
-function closeEditModal() {
-  document.getElementById('editModal').classList.remove('show');
-}
-
-function renderTree(filter) {
-  var container = document.getElementById('treeContainer');
-  var html = '';
-  orgData.forEach(function(dept, di) {
-    html += '<div class="tree-node">';
-    html += '<div class="tree-node-content" onclick="toggleNode(this)">';
-    html += '<span class="tree-toggle expanded">▶</span>';
-    html += '<span class="tree-label" style="font-weight:500;">' + dept.name + '</span>';
-    html += '</div>';
-    html += '<div class="tree-children">';
-    dept.children.forEach(function(group, gi) {
-      html += '<div class="tree-node">';
-      html += '<div class="tree-node-content" onclick="toggleNode(this)">';
-      html += '<span class="tree-toggle expanded">▶</span>';
-      html += '<span class="tree-label" style="font-weight:500;">' + group.name + '</span>';
-      html += '</div>';
-      html += '<div class="tree-children">';
-      group.members.forEach(function(m) {
-        if (filter && m.indexOf(filter) === -1) return;
-        var checked = selectedStaff.indexOf(m) >= 0;
-        html += '<div class="tree-node">';
-        html += '<div class="tree-node-content" onclick="toggleStaff(\'' + m + '\')">';
-        html += '<span class="tree-toggle empty">▶</span>';
-        html += '<span class="tree-checkbox' + (checked ? ' checked' : '') + '"></span>';
-        html += '<span class="tree-label">' + m + '</span>';
-        html += '</div>';
-        html += '</div>';
-      });
-      html += '</div></div>';
+function toggleDropdown() {
+  dropdownOpen = !dropdownOpen;
+  var dd = document.getElementById('groupDropdown');
+  if (dropdownOpen) {
+    var html = '';
+    Object.keys(orgGroups).forEach(function(g) {
+      var cls = g === currentGroup ? 'group-option active' : 'group-option';
+      html += '<div class="' + cls + '" onclick="selectGroup(\'' + g + '\')">' + g + '</div>';
     });
-    html += '</div></div>';
+    dd.innerHTML = html;
+    dd.classList.add('show');
+  } else {
+    dd.classList.remove('show');
+  }
+}
+
+function selectGroup(name) {
+  currentGroup = name;
+  document.getElementById('groupInput').value = name;
+  document.getElementById('groupDropdown').classList.remove('show');
+  dropdownOpen = false;
+  renderMemberList();
+}
+
+function renderMemberList() {
+  var container = document.getElementById('memberList');
+  if (!currentGroup || !orgGroups[currentGroup]) {
+    container.innerHTML = '<div class="empty-state"><svg class="empty-icon" viewBox="0 0 79 86" fill="none"><rect x="10" y="20" width="59" height="45" rx="4" fill="#e4e7ed" opacity="0.5"/><rect x="18" y="30" width="43" height="4" rx="2" fill="#c0c4cc" opacity="0.4"/><rect x="18" y="40" width="30" height="4" rx="2" fill="#c0c4cc" opacity="0.4"/><rect x="18" y="50" width="36" height="4" rx="2" fill="#c0c4cc" opacity="0.4"/></svg><span class="empty-text">暂无数据</span></div>';
+    return;
+  }
+  var members = orgGroups[currentGroup];
+  var selected = gradeConfig[currentGrade] || [];
+  var html = '<div class="member-list">';
+  members.forEach(function(m) {
+    var isChecked = selected.indexOf(m) >= 0;
+    html += '<div class="member-item" onclick="toggleMember(\'' + m + '\')">';
+    html += '<span class="member-checkbox' + (isChecked ? ' checked' : '') + '"></span>';
+    html += '<span>' + m + '</span>';
+    html += '</div>';
   });
+  html += '</div>';
   container.innerHTML = html;
 }
 
-function toggleNode(el) {
-  var children = el.nextElementSibling;
-  if (!children || !children.classList.contains('tree-children')) return;
-  var toggle = el.querySelector('.tree-toggle');
-  if (children.classList.contains('collapsed')) {
-    children.classList.remove('collapsed');
-    toggle.classList.add('expanded');
-  } else {
-    children.classList.add('collapsed');
-    toggle.classList.remove('expanded');
-  }
-}
-
-function toggleStaff(name) {
-  var idx = selectedStaff.indexOf(name);
+function toggleMember(name) {
+  var arr = gradeConfig[currentGrade] || [];
+  var idx = arr.indexOf(name);
   if (idx >= 0) {
-    selectedStaff.splice(idx, 1);
+    arr.splice(idx, 1);
   } else {
-    selectedStaff.push(name);
+    arr.push(name);
   }
-  renderTree(document.getElementById('staffSearch').value);
-  renderSelected();
+  gradeConfig[currentGrade] = arr;
+  renderMemberList();
+  renderSelectedTags();
 }
 
-function renderSelected() {
-  var header = document.getElementById('selectedHeader');
-  var list = document.getElementById('selectedList');
-  header.textContent = '已选 ' + selectedStaff.length + ' 人';
-  var html = '';
-  selectedStaff.forEach(function(s) {
-    html += '<div class="selected-item">';
-    html += '<span class="name">' + s + '</span>';
-    html += '<button class="remove-btn" onclick="removeStaff(\'' + s + '\')">✕</button>';
-    html += '</div>';
-  });
-  list.innerHTML = html || '<div style="padding:20px;text-align:center;color:#bfbfbf;">暂无已选人员</div>';
-}
-
-function removeStaff(name) {
-  var idx = selectedStaff.indexOf(name);
-  if (idx >= 0) selectedStaff.splice(idx, 1);
-  renderTree(document.getElementById('staffSearch').value);
-  renderSelected();
-}
-
-function filterTree() {
-  renderTree(document.getElementById('staffSearch').value);
-}
-
-function saveConfig() {
-  if (selectedStaff.length === 0) {
-    showToast('请至少选择一位承接人员');
+function renderSelectedTags() {
+  var container = document.getElementById('selectedTags');
+  var arr = gradeConfig[currentGrade] || [];
+  if (arr.length === 0) {
+    container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#c0c4cc;font-size:14px;">暂未选择坐席</div>';
     return;
   }
-  gradeConfig[currentGrade] = selectedStaff.slice();
-  updateTable();
-  closeEditModal();
-  showToast('保存成功');
+  var html = '<div class="tag-wrap">';
+  arr.forEach(function(name) {
+    html += '<span class="agent-tag">';
+    html += '<span class="agent-name">' + name + '</span>';
+    html += '<span class="close" onclick="removeAgent(\'' + name + '\')">✕</span>';
+    html += '</span>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
 }
 
-function updateTable() {
-  var rows = document.querySelectorAll('#expcampTable tbody tr');
-  rows.forEach(function(row) {
-    var grade = row.getAttribute('data-grade');
-    var cell = row.querySelector('.agents-cell');
-    var agents = gradeConfig[grade] || [];
-    if (agents.length > 0) {
-      cell.textContent = agents.join(', ');
-    } else {
-      cell.innerHTML = '<span class="empty-agents">—</span>';
-    }
-  });
+function removeAgent(name) {
+  var arr = gradeConfig[currentGrade] || [];
+  var idx = arr.indexOf(name);
+  if (idx >= 0) arr.splice(idx, 1);
+  gradeConfig[currentGrade] = arr;
+  renderMemberList();
+  renderSelectedTags();
+}
+
+function resetSelection() {
+  gradeConfig[currentGrade] = (savedConfig[currentGrade] || []).slice();
+  currentGroup = '';
+  document.getElementById('groupInput').value = '';
+  renderMemberList();
+  renderSelectedTags();
+  showToast('已重置为上次保存的配置');
+}
+
+function confirmSelection() {
+  var arr = gradeConfig[currentGrade] || [];
+  savedConfig[currentGrade] = arr.slice();
+  showToast('保存成功，已配置 ' + arr.length + ' 位坐席');
 }
 
 function showToast(msg) {
@@ -513,6 +530,16 @@ function showToast(msg) {
   t.classList.add('show');
   setTimeout(function() { t.classList.remove('show'); }, 2000);
 }
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#groupSelect')) {
+    document.getElementById('groupDropdown').classList.remove('show');
+    dropdownOpen = false;
+  }
+});
+
+renderMemberList();
+renderSelectedTags();
 </script>
 </body>
 </html>

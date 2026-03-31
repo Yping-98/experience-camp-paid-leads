@@ -131,7 +131,7 @@ flowchart TD
 
 ## 六、可交互原型
 
-在线预览：[点击查看可交互原型](placeholder)
+在线预览：[点击查看可交互原型](https://yping-98.github.io/experience-camp-paid-leads/%E4%BD%93%E9%AA%8C%E8%90%A5%E4%BB%98%E8%B4%B9%E7%BA%BF%E7%B4%A2-%E4%BA%A4%E4%BA%92%E5%8E%9F%E5%9E%8B.html)
 
 > 原型为可交互 HTML 页面，点击链接即可在浏览器中体验完整交互流程。
 
